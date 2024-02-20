@@ -1,0 +1,2 @@
+# NoAFK
+KeyBoard Simulator
