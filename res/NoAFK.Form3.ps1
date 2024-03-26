@@ -89,6 +89,21 @@ $ValPauseFinMot.Maximum = 100000
 $ValPauseFinMot.Value = 1000
 $form.Controls.Add($ValPauseFinMot)
 
+# Hasard
+# CrÃ©er un controle Label pour afficher un texte
+$labelRandom = New-Object System.Windows.Forms.Label
+$labelRandom.Location = New-Object System.Drawing.Point (10,205)
+$labelRandom.Size = New-Object System.Drawing.Size (190,20)
+$labelRandom.Text = "% of random to simulate a human :"
+$form.Controls.Add($labelRandom)
+# CrÃ©er un controle NumericUpDown pour saisir un nombre entier
+$ValRandom = New-Object System.Windows.Forms.NumericUpDown
+$ValRandom.Location = New-Object System.Drawing.Point (260,202)
+$ValRandom.Size = New-Object System.Drawing.Size (80,20)
+$ValRandom.Minimum = 1
+$ValRandom.Maximum = 100
+$ValRandom.Value = 50
+$form.Controls.Add($ValRandom)
 
 # Creer un controle Label pour afficher les infos
 $Infos = New-Object System.Windows.Forms.Label
@@ -158,7 +173,7 @@ $ValPauseFinMot.add_ValueChanged({
 
 
 # Modification de la langue
-    # Créer un text area pour stocker la valeur de la langue
+    # Crï¿½er un text area pour stocker la valeur de la langue
     $LanguageVariable = New-Object System.Windows.Forms.TextBox
     $LanguageVariable.Location = New-Object System.Drawing.Point (210,17)
     $LanguageVariable.Size = New-Object System.Drawing.Size (30,20)
@@ -166,36 +181,37 @@ $ValPauseFinMot.add_ValueChanged({
     $form.Controls.Add($LanguageVariable)
 
 
-    # Créer un contrôle combo box pour afficher les langues disponibles
+    # Crï¿½er un contrï¿½le combo box pour afficher les langues disponibles
     $LanguageComboBox = New-Object System.Windows.Forms.ComboBox
     $LanguageComboBox.Location = New-Object System.Drawing.Point(240,17)
     $LanguageComboBox.Size = New-Object System.Drawing.Size(100,20)
     # Ajouter les langues au combo box
     $LanguageComboBox.Items.Add("English")
-    $LanguageComboBox.Items.Add("Français")
-    $LanguageComboBox.Items.Add("Español")
-    # Sélectionner la langue actuelle
+    $LanguageComboBox.Items.Add("FranÃ§ais")
+    $LanguageComboBox.Items.Add("EspaÃ±ol")
+    # Sï¿½lectionner la langue actuelle
     $LanguageComboBox.SelectedItem = "English"
-    # Définir l'événement SelectedIndexChanged du combo box
+    # Dï¿½finir l'ï¿½vï¿½nement SelectedIndexChanged du combo box
     $LanguageComboBox.Add_SelectedIndexChanged({
-        # Modifier la langue du formulaire principal en fonction de la sélection
+        # Modifier la langue du formulaire principal en fonction de la sï¿½lection
         switch ($LanguageComboBox.SelectedItem) {
-            "Français" {
-                # Changer le texte des contrôles du formulaire principal en français
+            "FranÃ§ais" {
+                # Changer le texte des contrï¿½les du formulaire principal en franï¿½ais
                 $form.Text = "NoAFK (Fr)"
-                $labelNbIterations.Text = "nombre d'itérations à faire :"
+                $labelNbIterations.Text = "nombre d'itÃ©rations Ã  faire :"
                 $label2.Text = " => En millisecondes :"
-                $labelPauseEntre2.Text = "pause entre 2 itérations :"
-                $labelPauseEntreLettres.Text = "pause après chaque lettre :"
+                $labelPauseEntre2.Text = "pause entre 2 itÃ©rations :"
+                $labelPauseEntreLettres.Text = "pause aprÃ¨s chaque lettre :"
                 $labelPauseFinMot.Text = "pause fin de mot :"
                 $Infos.Text = 'Selectionner une zone de texte. Le script s executera dans 5 secondes'
-                # Changer le texte des options du menu strip en français
+                # Changer le texte des options du menu strip en franï¿½ais
                 $AboutMenuItem.Text = "A Propos"
                 $labelestimation.Text = "estimation duree : "
+                $labelRandom.Text = "% de hasard (simule un humain) :"
                 $LanguageVariable.Text = "FR"
             }
             "English" {
-                # Changer le texte des contrôles du formulaire principal en anglais
+                # Changer le texte des contrï¿½les du formulaire principal en anglais
                 $form.Text = "NoAFK (En)"
                 $labelNbIterations.Text = "number of iterations to do :"
                 $label2.Text = " => In milliseconds :"
@@ -206,43 +222,45 @@ $ValPauseFinMot.add_ValueChanged({
                 # Changer le texte des options du menu strip en anglais
                 $AboutMenuItem.Text = "About"
                 $labelestimation.Text = "estimated duration : "
+                $labelRandom.Text = "% of random to simulate a human :"
                 $LanguageVariable.Text = "EN"
             }
-            "Español" {
-                # Changer le texte des contrôles du formulaire principal en espagnol
+            "EspaÃ±ol" {
+                # Changer le texte des contrï¿½les du formulaire principal en espagnol
                 $form.Text = "NoAFK (Es)"
-                $labelNbIterations.Text = "número de iteraciones a hacer :"
+                $labelNbIterations.Text = "nÃºmero de iteraciones a hacer :"
                 $label2.Text = " => En milisegundos :"
                 $labelPauseEntre2.Text = "pausa entre 2 iteraciones :"
-                $labelPauseEntreLettres.Text = "pausa después de cada letra :"
+                $labelPauseEntreLettres.Text = "pausa despuÃ©s de cada letra :"
                 $labelPauseFinMot.Text = "pausa fin de palabra :"
-                $Infos.Text = 'Seleccione un área de texto. El script se ejecutará en 5 segundos'
+                $Infos.Text = 'Seleccione un Ã¡rea de texto. El script se ejecutarÃ¡ en 5 segundos'
                 # Changer le texte des options du menu strip en espagnol
                 $AboutMenuItem.Text = "Acerca de"
-                $labelestimation.Text = "duración estimada : "
+                $labelestimation.Text = "duraciÃ³n estimada : "
+                $labelRandom.Text = "% de azar para simular un humano :"
                 $LanguageVariable.Text = "ES"
             }
         }
     })
-    # Ajouter le combo box aux contrôles du formulaire
+    # Ajouter le combo box aux contrï¿½les du formulaire
     $Form.Controls.Add($LanguageComboBox)
 
 
 # *********************************************************
 
 
-# Créer un objet menu strip
+# Crï¿½er un objet menu strip
 $MenuStrip = New-Object System.Windows.Forms.MenuStrip
-# Ajouter le menu strip aux contrôles du formulaire
+# Ajouter le menu strip aux contrï¿½les du formulaire
 $form.Controls.Add($MenuStrip)
 
-# Créer un objet menu item pour l'option About
+# Crï¿½er un objet menu item pour l'option About
 $AboutMenuItem = New-Object System.Windows.Forms.ToolStripMenuItem
-# Définir le texte du menu item
+# Dï¿½finir le texte du menu item
 $AboutMenuItem.Text = "About"
-# Définir l'événement Click du menu item
+# Dï¿½finir l'ï¿½vï¿½nement Click du menu item
 $AboutMenuItem.Add_Click({
-    # Créer un autre formulaire pour afficher les informations sur le script
+    # Crï¿½er un autre formulaire pour afficher les informations sur le script
     $AboutForm = New-Object System.Windows.Forms.Form
     $AboutForm.Text = "About"
     $AboutForm.Size = New-Object System.Drawing.Size(300,200)
@@ -250,12 +268,12 @@ $AboutMenuItem.Add_Click({
     $AboutForm.AutoSizeMode = GrowAndShrink
     $AboutForm.Auto
     $AboutForm.StartPosition = "CenterScreen"
-    # Créer un contrôle label pour afficher le texte
+    # Crï¿½er un contrï¿½le label pour afficher le texte
     $AboutLabel = New-Object System.Windows.Forms.Label
-    $AboutLabel.Text = "NoAFK Keyboard simulator. By Kiloloan"
+    $AboutLabel.Text = "NoAFK Keyboard simulator. By Kiloloan. more info here : https://github.com/kiloloan/NoAFK "
     $AboutLabel.AutoSize = $true
     $AboutLabel.Location = New-Object System.Drawing.Point(10,10)
-    # Ajouter le label aux contrôles du formulaire
+    # Ajouter le label aux contrï¿½les du formulaire
     $AboutForm.Controls.Add($AboutLabel)
     # Afficher le formulaire
     $AboutForm.ShowDialog()

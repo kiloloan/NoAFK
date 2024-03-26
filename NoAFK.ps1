@@ -1,16 +1,42 @@
-﻿# NoAFK v1.0
+﻿# NoAFK v1.1
 # KeyBoard Simulator / Simulateur de Clavier
 # by Kiloloan
+# URL du projet : https://github.com/kiloloan/NoAFK
 
 
 # Va chercher le chemin racine du script
 $varCheminDuScript = $MyInvocation.MyCommand.Path
 $varCheminRacine = [io.path]::GetDirectoryName($varCheminDuScript)
-$varCheminForm = ($varCheminRacine + "\res\NoAFK.Form3.ps1")
+$varCheminForm = ($varCheminRacine + "\res\NoAFK.Form3.1.ps1")
 write-host $varCheminForm
 
 
 Import-Module -Name $varCheminForm -Verbose -Force
+
+## charge fonctions 
+function Start-RandomSleep {
+    param (
+        [int]$inputMilliseconds
+    )
+
+    # Définir les facteurs de marge (par exemple, 50 %)
+    $lowerFactor = 1 - $RandomFactor
+    $upperFactor = 1 + $RandomFactor
+    Write-Output "Random $RandomFactor"
+
+    # Calculer les bornes de la plage en utilisant les facteurs
+    $minRange = $inputMilliseconds * $lowerFactor
+    $maxRange = $inputMilliseconds * $upperFactor
+
+    # Générer un nombre aléatoire entre $minRange et $maxRange
+    $randomMilliseconds = Get-Random -Minimum $minRange -Maximum $maxRange
+
+    # Faire une pause
+    Write-Output "Pause = $randomMilliseconds || $lowerFactor - $upperFactor"
+    Start-Sleep -Milliseconds $randomMilliseconds
+}
+##############################
+
 
 # Afficher le formulaire et récupérer le résultat
 $result = $form.ShowDialog()
@@ -22,6 +48,8 @@ if ($result -eq [System.Windows.Forms.DialogResult]::OK) {
     $tempoEntreLettres = $ValPauseEntreLettres.Value
     $tempoFinMot = $ValPauseFinMot.Value
     $LangSET = $LanguageVariable.Text
+    $RandomFactor = $ValRandom.Value / 100
+    $DelSET = "true" #utltérieurement sera a récupérer du formulaire
     Write-Output $LangSET
       }
 
@@ -47,25 +75,30 @@ Start-Sleep -MilliSeconds 5000
 
 # Faire une boucle du nombre d'itérations demandé
 For ($i = 1; $i -le $iterations; $i++) {
+    Write-Output "n° $i / $iterations"
     # Choisir un mot aléatoire dans la variable $mots et l'envoyer au champ de saisie
     $mot = Get-Random -InputObject $mots
     # $wshell.SendKeys($mot)
         # Envoyer chaque lettre du mot au champ de saisie
         foreach ($lettre in $mot.ToCharArray()) {
         $wshell.SendKeys($lettre)
-        Start-Sleep -Milliseconds $tempoEntreLettres
+        Start-RandomSleep -inputMilliseconds $tempoEntreLettres
         }
 
     #pause fin de mot saisie
-    Start-Sleep -MilliSeconds $tempoFinMot
+    Start-RandomSleep -inputMilliseconds $tempoFinMot
 
     # Effacer le même nombre de caractères que le mot choisi
-    $wshell.SendKeys("{BS $($mot.Length)}")
+    if($DelSET -eq 'true'){
+        $wshell.SendKeys("{BS $($mot.Length)}")
 
-    #pause fin de mot
-    $wshell.SendKeys($i)
-    Start-Sleep -MilliSeconds $tempoEntreMot
-    $wshell.SendKeys("{BS $(([string]$i).Length)}")
-
+        #pause fin de mot
+        $wshell.SendKeys($i)
+        Start-RandomSleep -inputMilliseconds $tempoEntreMot
+        $wshell.SendKeys("{BS $(([string]$i).Length)}")
+        } 
+    else {
+        $wshell.SendKeys(" ")
+        }
 }
 $wshell.SendKeys("ok")
