@@ -2,7 +2,9 @@
 KeyBoard Simulator
 ## Author
 by Kiloloan
-version ~1.0 
+
+# ChangeLog
+version ~1.1 : added random functionality
 
 ## Description
 This script can simulate a keyboard<br>
@@ -17,22 +19,27 @@ NoAFK picks random words from a dictionary file and writes them letter by letter
 
 ### Features
 NoAFK can be use in English, French and Spanish.
-> In next time, language will change the language of the dictonnary
+> language change the language of the dictonnary
 
 ## Parameters
 ### Number of iterations to do
 _nombre d'itérations à faire_ / _número de iteraciones a hacer_<br>
-Number of words entered before the end of the script
+> Number of words entered before the end of the script
 
 ### Pause between 2 iterations
 _pause entre 2 itérations_ / _pausa entre 2 iteraciones_<br>
-Pause time between each word, after its deletion
+> Pause time between each word, after its deletion
 
 ### Pause after each letter
 _pause après chaque lettre_ / _pausa después de cada letra_<br>
-Pause time between each letter
+> Pause time between each letter
 
 ### Pause end of word
 _pause fin de mot_ / _pausa fin de palabra_<br>
-Pause time after the word is displayed, before it is erased.
+> Pause time after the word is displayed, before it is erased.
+
+### % of random to simulate a human
+_% de hasard (simule un humain)_ / _% de azar para simular un humano_<br>
+> Percentage of temporal variation, facilitating non-detection of the software
+
 
