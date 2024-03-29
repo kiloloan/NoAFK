@@ -1,4 +1,4 @@
-﻿# NoAFK v1.1
+# NoAFK v1.2
 # KeyBoard Simulator / Simulateur de Clavier
 # by Kiloloan
 # URL du projet : https://github.com/kiloloan/NoAFK
@@ -7,7 +7,7 @@
 # Va chercher le chemin racine du script
 $varCheminDuScript = $MyInvocation.MyCommand.Path
 $varCheminRacine = [io.path]::GetDirectoryName($varCheminDuScript)
-$varCheminForm = ($varCheminRacine + "\res\NoAFK.Form3.1.ps1")
+$varCheminForm = ($varCheminRacine + "\res\NoAFK.Form3.ps1")
 write-host $varCheminForm
 
 
@@ -22,7 +22,7 @@ function Start-RandomSleep {
     # Définir les facteurs de marge (par exemple, 50 %)
     $lowerFactor = 1 - $RandomFactor
     $upperFactor = 1 + $RandomFactor
-    Write-Output "Random $RandomFactor"
+   # Write-Output "Random $RandomFactor"
 
     # Calculer les bornes de la plage en utilisant les facteurs
     $minRange = $inputMilliseconds * $lowerFactor
@@ -32,7 +32,7 @@ function Start-RandomSleep {
     $randomMilliseconds = Get-Random -Minimum $minRange -Maximum $maxRange
 
     # Faire une pause
-    Write-Output "Pause = $randomMilliseconds || $lowerFactor - $upperFactor"
+   # Write-Output "Pause = $randomMilliseconds || $lowerFactor - $upperFactor"
     Start-Sleep -Milliseconds $randomMilliseconds
 }
 ##############################
@@ -49,7 +49,7 @@ if ($result -eq [System.Windows.Forms.DialogResult]::OK) {
     $tempoFinMot = $ValPauseFinMot.Value
     $LangSET = $LanguageVariable.Text
     $RandomFactor = $ValRandom.Value / 100
-    $DelSET = "true" #utltérieurement sera a récupérer du formulaire
+    $DelSET = $cbSupress.Checked
     Write-Output $LangSET
       }
 
@@ -102,3 +102,6 @@ For ($i = 1; $i -le $iterations; $i++) {
         }
 }
 $wshell.SendKeys("ok")
+
+
+
