@@ -1,3 +1,8 @@
+# NoAFK.Form v3.2
+# KeyBoard Simulator / Simulateur de Clavier
+# by Kiloloan
+# URL du projet : https://github.com/kiloloan/NoAFK
+
 # Va chercher le chemin racine du script
 $varCheminDuScript = $MyInvocation.MyCommand.Path
 $varCheminRacine = [io.path]::GetDirectoryName($varCheminDuScript)
@@ -105,6 +110,21 @@ $ValRandom.Maximum = 100
 $ValRandom.Value = 50
 $form.Controls.Add($ValRandom)
 
+# Supress
+# Créer un controle Label pour afficher un texte
+#$labelSupress = New-Object System.Windows.Forms.Label
+#$labelSupress.Location = New-Object System.Drawing.Point (10,235)
+#$labelSupress.Size = New-Object System.Drawing.Size (190,20)
+#$labelSupress.Text = "delete each word"
+#$form.Controls.Add($labelSupress)
+# Créer un controle Checkbox
+$cbSupress = new-object System.Windows.Forms.checkbox
+$cbSupress.Location = New-Object System.Drawing.Point (30,235)
+$cbSupress.Size = New-Object System.Drawing.Size (170,20)
+$cbSupress.Text = "delete each word"
+$cbSupress.Checked = $true
+$Form.Controls.Add($cbSupress)  
+
 # Creer un controle Label pour afficher les infos
 $Infos = New-Object System.Windows.Forms.Label
 $Infos.Location = New-Object System.Drawing.Point (10,290)
@@ -133,7 +153,7 @@ $form.Controls.Add($cancelButton)
 
 #Affichage dynamique du temps estimee ********************
 $labelestimation = New-Object System.Windows.Forms.Label
-$labelestimation.Location = New-Object System.Drawing.Point (40,245)
+$labelestimation.Location = New-Object System.Drawing.Point (40,275)
 $labelestimation.Size = New-Object System.Drawing.Size (110,30)
 $labelestimation.Text = "estimated duration : "
 $labelestimation.ForeColor = 'Green'
@@ -141,7 +161,7 @@ $form.Controls.Add($labelestimation)
 #Value a faire evoluer
 $estimation = ($ValNbIterations.Value * ($ValPauseEntre2.Value + (7 * $ValPauseEntreLettres.Value) + $ValPauseFinMot.Value)) / 1000
 $Resultestimation = New-Object System.Windows.Forms.Label
-$Resultestimation.Location = New-Object System.Drawing.Point (160,245)
+$Resultestimation.Location = New-Object System.Drawing.Point (160,275)
 $Resultestimation.Size = New-Object System.Drawing.Size (100,30)
 $Resultestimation.Text = " $estimation $uniteEstimationTempsSec"
 $Resultestimation.ForeColor = 'Green'
@@ -209,6 +229,7 @@ $ValPauseFinMot.add_ValueChanged({
                 $labelestimation.Text = "estimation duree : "
                 $labelRandom.Text = "% de hasard (simule un humain) :"
                 $LanguageVariable.Text = "FR"
+                $cbSupress.Text = "supprime chaque mot"
             }
             "English" {
                 # Changer le texte des contr�les du formulaire principal en anglais
@@ -224,9 +245,10 @@ $ValPauseFinMot.add_ValueChanged({
                 $labelestimation.Text = "estimated duration : "
                 $labelRandom.Text = "% of random to simulate a human :"
                 $LanguageVariable.Text = "EN"
+                $cbSupress.Text = "delete each word"
             }
             "Español" {
-                # Changer le texte des contr�les du formulaire principal en espagnol
+                # Changer le texte des contrôles du formulaire principal en espagnol
                 $form.Text = "NoAFK (Es)"
                 $labelNbIterations.Text = "número de iteraciones a hacer :"
                 $label2.Text = " => En milisegundos :"
@@ -239,10 +261,11 @@ $ValPauseFinMot.add_ValueChanged({
                 $labelestimation.Text = "duración estimada : "
                 $labelRandom.Text = "% de azar para simular un humano :"
                 $LanguageVariable.Text = "ES"
+                $cbSupress.Text = "borrar cada palabra"
             }
         }
     })
-    # Ajouter le combo box aux contr�les du formulaire
+    # Ajouter le combo box aux contrôles du formulaire
     $Form.Controls.Add($LanguageComboBox)
 
 
