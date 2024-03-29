@@ -4,6 +4,7 @@ KeyBoard Simulator
 by Kiloloan
 
 ## ChangeLog
+version ~1.2 : added no delete word functionality
 version ~1.1 : added random functionality
 
 # Installation
@@ -57,6 +58,11 @@ _pause après chaque lettre_ / _pausa después de cada letra_<br>
 ### Pause end of word
 _pause fin de mot_ / _pausa fin de palabra_<br>
 > Pause time after the word is displayed, before it is erased.
+
+> ### delete each word
+_supprime chaque mot_ / _borrar cada palabra_<br>
+> by default, erases each word after writing.
+
 
 ### % of random to simulate a human
 _% de hasard (simule un humain)_ / _% de azar para simular un humano_<br>
